@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -10,4 +11,4 @@ class Blog(models.Model):
     section = models.CharField(max_length=115)
     dislikes = models.IntegerField()
     short_version = models.CharField(max_length=1155)
-    text = models.TextField()
+    text = RichTextField(blank=True, null=True)
