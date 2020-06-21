@@ -1,5 +1,0 @@
-FROM django
-
-COPY
-WORKDIR ./
-

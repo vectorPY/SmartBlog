@@ -3,4 +3,11 @@ from django.db import models
 
 # Create your models here.
 class Blog(models.Model):
-    pass
+    author = models.CharField(max_length=115)
+    title = models.CharField(max_length=250)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    likes = models.IntegerField()
+    section = models.CharField(max_length=115)
+    dislikes = models.IntegerField()
+    short_version = models.CharField(max_length=1155)
+    text = models.TextField()
