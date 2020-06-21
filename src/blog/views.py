@@ -9,5 +9,5 @@ def home(response):
 
 
 class ArticleList(ListView):
-    template_name = ''
+    template_name = 'Blog_list.html'
     queryset = Blog.objects.all()
