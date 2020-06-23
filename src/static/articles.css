@@ -1,0 +1,31 @@
+div {
+    width: 1150px;
+    height: 350px;
+  border: 15px solid green;
+  padding: 50px;
+  margin: 70px auto;
+}
+
+h1{
+    text-align: center
+}
+
+#author {
+    position: relative;
+    top: 151px;
+    right: 15px;
+}
+
+#title {
+    position: relative;
+    bottom: 45px;
+    font-size: 30px;
+    text-align: center;
+}
+
+#timestamp {
+    position: relative;
+    top: 145px;
+    font-size: 10px;
+    right: 15px;
+}
