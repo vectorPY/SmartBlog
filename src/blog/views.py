@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from .models import Blog
 
 
@@ -11,3 +11,10 @@ def home(response):
 class ArticleList(ListView):
     template_name = 'Blog_list.html'
     queryset = Blog.objects.all()
+
+
+class CreateArticle(CreateView):
+    template_name = 'create_list.html'
+    model = Blog
+    queryset = Blog.objects.all()
+    fields = '__all__'

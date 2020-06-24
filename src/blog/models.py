@@ -12,3 +12,4 @@ class Blog(models.Model):
     dislikes = models.IntegerField()
     short_version = models.CharField(max_length=1155)
     text = RichTextField(blank=True, null=True)
+    image = models.ImageField(blank=True)
