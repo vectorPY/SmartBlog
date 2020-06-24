@@ -8,13 +8,12 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Our Articles:</h1>
+    <h1 id="headline">Our Articles:</h1>
     {% for elems in blog_list %}
-        <div>
+        <div id="list">
             <p id="title">{{ elems.title }}</p>
             <p id="author">by {{ elems.author }}</p>
             <p id="timestamp">created at {{ elems.timestamp }}</p>
-            <p id="shortway">{{ elems.short_version }} <a id="read_more" href="">Read more</a></p>
         </div>
     {% endfor %}
 {% endblock %}
