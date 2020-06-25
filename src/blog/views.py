@@ -16,7 +16,7 @@ class ArticleList(ListView):
 
 def create_blog(response):
     if response.method == 'POST':
-        form = RawBlogForm(response.POST)
+        form = RawBlogForm(response.POST, response.FILES)
 
         if form.is_valid():
             author = form.cleaned_data['author']
@@ -26,7 +26,9 @@ def create_blog(response):
             text = form.cleaned_data['text']
             image = form.cleaned_data['image']
 
-            blog = Blog(author=author, title=title, section=section, short_version=short_version, text=text, image=image)
+            blog = Blog(author=author, title=title, section=section, short_version=short_version, text=text, image=image
+                        ,
+                        likes=0, dislikes=0)
 
             blog.save()
 

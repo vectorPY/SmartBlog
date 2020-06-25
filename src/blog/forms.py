@@ -1,5 +1,5 @@
 from django import forms
-from ckeditor.fields import RichTextField
+from ckeditor.widgets import CKEditorWidget
 
 sections = [
     ("Technology", "Technology"),
@@ -14,8 +14,8 @@ class RawBlogForm(forms.Form):
     author = forms.CharField(label='Author:')
     title = forms.CharField(label='Title')
     section = forms.CharField(label='Section', widget=forms.Select(choices=sections))
-    shortVersion = forms.TextInput()
-    text = RichTextField()
+    shortVersion = forms.CharField(widget=forms.Textarea)
+    text = forms.CharField(widget=CKEditorWidget)
     image = forms.ImageField()
 
     def clean_author(self):
@@ -31,7 +31,7 @@ class RawBlogForm(forms.Form):
         title = self.cleaned_data.get('title')
         if len(title) > 150:
             raise forms.ValidationError("Your title is too long")
-        elif len(title) > 5:
+        elif len(title) < 5:
             raise forms.ValidationError("Your title is too short")
         else:
             return title
