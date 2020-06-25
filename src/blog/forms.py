@@ -35,3 +35,17 @@ class RawBlogForm(forms.Form):
             raise forms.ValidationError("Your title is too short")
         else:
             return title
+
+    def clean_shortVersion(self):
+        short = self.cleaned_data.get('shortVersion')
+        if len(short) > 600:
+            raise forms.ValidationError("The description is too long")
+        else:
+            return short
+
+    def clean_section(self):
+        section = self.cleaned_data.get('section')
+        if section not in sections:
+            raise forms.ValidationError("This section is not available")
+        else:
+            return section

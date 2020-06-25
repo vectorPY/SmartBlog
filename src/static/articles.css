@@ -34,3 +34,7 @@
     position: relative;
 }
 
+#short-version {
+    position: relative;
+    bottom: 100px;
+}
