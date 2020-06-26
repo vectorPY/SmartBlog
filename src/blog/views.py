@@ -49,3 +49,8 @@ def full_blog(response, my_id):
         "blog": blog
     }
     return render(response, "full_blog.html", context)
+
+
+def edit_blog(response, my_id):
+    blog = Blog.objects.filter(id=my_id)
+
