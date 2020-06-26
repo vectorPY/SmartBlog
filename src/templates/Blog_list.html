@@ -2,20 +2,22 @@
 
 {% load static %}
 
+
 {% block title %}
     <link rel="stylesheet" type="text/css" href="{% static 'articles.css' %}">
     <title>Articles</title>
 {% endblock %}
 
 {% block content %}
-    <h1 id="headline">Our Articles:</h1>
+    <h1 id="headline" align="center">Our Articles:</h1>
     {% for elems in blog_list %}
-        <div id="list">
-            <p id="title">{{ elems.title }}</p>
-            <p id="author">by {{ elems.author }}</p>
-            <p id="timestamp">created at {{ elems.timestamp }}</p>
-            <!--<img src="./data/{{ elems.image }}" alt="">-->
-            <p id="short-version">{{ elems.short_version }}</p>
+        <div class="card" style="width: 25rem;">
+            <img class="card-img-top" src="../static/favicon/smart.svg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{ elems.title }}e</h5>
+                <p class="card-text">{{ elems.short_version }}</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
         </div>
     {% endfor %}
 {% endblock %}

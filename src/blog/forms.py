@@ -22,7 +22,7 @@ class RawBlogForm(forms.Form):
         author = self.cleaned_data.get('author')
         if len(author) > 150:
             raise forms.ValidationError("Your name is too long")
-        elif len(author) < 7:
+        elif len(author) < 5:
             raise forms.ValidationError("Your name is too short")
         else:
             return author

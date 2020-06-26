@@ -40,3 +40,8 @@ def create_blog(response):
         "form": form
     }
     return render(response, "create_blog.html", context)
+
+
+def full_blog(response):
+    pass
+
