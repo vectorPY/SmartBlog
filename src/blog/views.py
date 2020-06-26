@@ -42,6 +42,10 @@ def create_blog(response):
     return render(response, "create_blog.html", context)
 
 
-def full_blog(response):
-    pass
+def full_blog(response, my_id):
+    blog = Blog.objects.filter(id=my_id)
 
+    context = {
+        "blog": blog
+    }
+    return render(response, "full_blog.html", context)

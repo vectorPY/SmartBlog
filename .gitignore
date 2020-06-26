@@ -1,2 +1,4 @@
 Smartblog.todo
 .idea
+db.sqlite3
+*.png

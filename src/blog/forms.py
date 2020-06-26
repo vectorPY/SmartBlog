@@ -43,9 +43,3 @@ class RawBlogForm(forms.Form):
         else:
             return short
 
-    def clean_section(self):
-        section = self.cleaned_data.get('section')
-        if section not in sections:
-            raise forms.ValidationError("This section is not available")
-        else:
-            return section
