@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.views.generic import ListView
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView, UpdateView
 from .models import Blog
 from .forms import RawBlogForm
 
@@ -21,6 +21,8 @@ def create_blog(response):
         if form.is_valid():
             instance = form.save()
 
+            return redirect("../articles")
+
     else:
         form = RawBlogForm()
 
@@ -39,8 +41,33 @@ def full_blog(response, my_id):
     return render(response, "full_blog.html", context)
 
 
+"""
 def edit_blog(response, my_id):
-    blog = Blog.objects.filter(id=my_id)
+    blog = get_object_or_404(Blog, id=my_id)
 
     if response.method == "POST":
         form = RawBlogForm(response.POST, instance=blog)
+
+        if form.is_valid():
+            blog = form.save()
+            return redirect(f"../articles/{my_id}")
+
+        else:
+            print(form.errors)
+
+    else:
+        form = RawBlogForm(response.POST, instance=blog)
+
+    context = {
+        "form": form
+    }
+
+    return render(response, "blog_edit.html", context)
+"""
+
+
+class Edit(UpdateView):
+    model = Blog
+    form_class = RawBlogForm
+    template_name = "blog_edit.html"
+    success_url = '../../articles'
