@@ -19,20 +19,8 @@ def create_blog(response):
         form = RawBlogForm(response.POST, response.FILES)
 
         if form.is_valid():
-            author = form.cleaned_data['author']
-            title = form.cleaned_data['title']
-            section = form.cleaned_data['section']
-            short_version = form.cleaned_data['shortVersion']
-            text = form.cleaned_data['text']
-            image = form.cleaned_data['image']
+            instance = form.save()
 
-            blog = Blog(author=author, title=title, section=section, short_version=short_version, text=text, image=image
-                        ,
-                        likes=0, dislikes=0)
-
-            blog.save()
-
-            form = RawBlogForm
     else:
         form = RawBlogForm()
 
@@ -52,34 +40,7 @@ def full_blog(response, my_id):
 
 
 def edit_blog(response, my_id):
-    form = RawBlogForm()
-    blog_ = Blog.objects.filter(id=my_id)
+    blog = Blog.objects.filter(id=my_id)
 
     if response.method == "POST":
-        form = RawBlogForm(response.POST)
-        if form.is_valid():
-            author = form.cleaned_data['author']
-            title = form.cleaned_data['title']
-            section = form.cleaned_data['section']
-            short_version = form.cleaned_data['shortVersion']
-            text = form.cleaned_data['text']
-            image = form.cleaned_data['image']
-
-            blog = Blog(author=author, title=title, section=section, short_version=short_version, text=text, image=image
-                        ,
-                        likes=blog_.likes, dislikes=blog_.dislikes)
-
-            blog.save()
-
-            blog_.delete()
-
-            return redirect("../../articles")
-
-        else:
-            print(form.errors)
-
-    context = {
-        'form': form,
-    }
-
-    return render(response, "blog_edit.html", context)
+        form = RawBlogForm(response.POST, instance=blog)
