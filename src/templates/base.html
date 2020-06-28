@@ -17,7 +17,7 @@
     />
     <link rel="stylesheet"  href="{% static "base.css" %}" />
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
-      <a class="navbar-brand" href="#">SmartBlog</a>
+      <a class="navbar-brand" href="/home">SmartBlog</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -35,6 +35,10 @@
             <a class="nav-link" href="/home"
               >Home</a
             >
+            <li class="nav-item active">
+            <a class="nav-link" href="/create"
+              >Write</a
+            >
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -49,9 +53,6 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="/articles">Articles</a>
-            </div>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/create">Write</a>
             </div>
           </li>
         </ul>

@@ -49,3 +49,6 @@ class Blog(models.Model):
     short_version = models.CharField(max_length=1155, validators=[validate_shortversion])
     text = RichTextField(blank=True, null=True)
     image = models.ImageField(blank=True, upload_to="")
+
+    class Meta:
+        permissions = (("can_write", "read"),)
