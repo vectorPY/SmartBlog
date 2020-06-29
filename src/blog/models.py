@@ -51,4 +51,7 @@ class Blog(models.Model):
     image = models.ImageField(blank=True, upload_to="")
 
     class Meta:
-        permissions = (("can_write", "read"),)
+        permissions = (
+            ("can_write", "Can write"),
+            ("can_read", "Can read"),
+        )
