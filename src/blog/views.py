@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, UpdateView
 from .models import Blog
-from .forms import RawBlogForm
+from .forms import RawBlogForm, MessageFrom
 from django.urls import reverse_lazy
+from django.core.mail import send_mail
+import os
 
 
 # Create your views here.
@@ -47,3 +49,34 @@ class Edit(UpdateView):
     form_class = RawBlogForm
     template_name = "blog_edit.html"
     success_url = reverse_lazy('list_articles')
+
+
+def apply_author(response):
+    form = MessageFrom()
+
+    if response.method == 'POST':
+        form = MessageFrom(response.POST)
+
+        if form.is_valid():
+            reason = form.cleaned_data['reason']
+            interested_in = form.cleaned_data['interested_in']
+            additional = form.cleaned_data['additional']
+            email = os.environ['MAIL_USER']
+
+            msg: str = interested_in + " " + additional
+
+            send_mail(
+                reason,
+                msg,
+                email,
+                ["<to>"],
+                fail_silently=False,
+            )
+    else:
+        form = MessageFrom()
+
+    context = {
+        "form": form,
+    }
+
+    return render(response, "message.html", context)

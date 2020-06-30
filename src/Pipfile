@@ -10,7 +10,7 @@ django = "*"
 django-ckeditor = "*"
 django-crispy-forms = "*"
 pillow = "*"
-
+yaml = "*"
 
 [requires]
 python_version = "3.8"
