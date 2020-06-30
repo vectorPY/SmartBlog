@@ -22,8 +22,8 @@ class RawBlogForm(forms.ModelForm):
 
 
 class MessageFrom(forms.Form):
+    name = forms.CharField(label='Enter your name: ')
     reason = forms.CharField(label='Your reason: ')
-    email = forms.EmailField(label='Enter email: ')
     interested_in = forms.CharField(label="Interested in: ", widget=forms.Select(choices=sections))
     additional = forms.CharField(widget=forms.Textarea)
 

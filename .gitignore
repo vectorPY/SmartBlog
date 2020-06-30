@@ -1,4 +1,5 @@
 Smartblog.todo
 .idea
 db.sqlite3
-*.png
+src/data
+src/SmartBlog/conf.py

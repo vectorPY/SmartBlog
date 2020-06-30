@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import json
+from .conf import EMAIL_USER, EMAIL_PASSWORD
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -140,17 +140,13 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 LOGIN_REDIRECT_URL = "/home"
 LOGOUT_REDIRECT_URL = "/home"
 
-print(os.getcwd())
-
-
-def load_config(param: str) -> str:
-    with open('/home/vector/PycharmProjects/SmartBlog/SmartBlog/config.json') as f:
-        data = json.load(f)
-        return data[param]
+"""
+create a conf.py file and insert EMAIL_USER and EMAIL_PASSWORD as variables
+"""
 
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = load_config('MAIL_USER')
-EMAIL_HOST_PASSWORD = load_config('MAIL_PASSWORD')
+EMAIL_HOST_USER = EMAIL_USER
+EMAIL_HOST_PASSWORD = EMAIL_PASSWORD

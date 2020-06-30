@@ -4,7 +4,6 @@ from .models import Blog
 from .forms import RawBlogForm, MessageFrom
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
-import os
 
 
 # Create your views here.
@@ -58,12 +57,12 @@ def apply_author(response):
         form = MessageFrom(response.POST)
 
         if form.is_valid():
-            reason = form.cleaned_data['reason']
-            interested_in = form.cleaned_data['interested_in']
-            additional = form.cleaned_data['additional']
-            email = os.environ['MAIL_USER']
-
-            msg: str = interested_in + " " + additional
+            reason: str = form.cleaned_data['reason']
+            interested_in: str = form.cleaned_data['interested_in']
+            additional: str = form.cleaned_data['additional']
+            name: str = form.cleaned_data['name']
+            email: str = "muellergoldmann@gmail.com"
+            msg: str = name + " " + interested_in + " " + additional
 
             send_mail(
                 reason,
