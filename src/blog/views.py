@@ -68,7 +68,7 @@ def apply_author(response):
                 reason,
                 msg,
                 email,
-                ["victor.lindow@icloud.com"],
+                ["vector.thedev@gmail.com"],
                 fail_silently=False,
             )
     else:

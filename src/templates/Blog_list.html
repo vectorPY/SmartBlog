@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load auth_extras %}
 
 
 {% block title %}
@@ -18,7 +19,9 @@
                     <h4 class="card-title">{{ elems.title }}</h4>
                     <p class="card-text">{{ elems.short_version }}</p>
                     <a href="/blog/{{ elems.id }}" class="btn btn-primary">Read more</a>
-                    <a href="/edit/{{ elems.id }}" class="btn btn-primary">Edit</a>
+                    {% if request.user|has_group:"Admin" %}
+                        <a href="/edit/{{ elems.id }}" class="btn btn-primary">Edit</a>
+                    {% endif %}
                 </div>
             </div>
         {% endif %}
