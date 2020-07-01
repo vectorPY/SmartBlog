@@ -35,3 +35,5 @@ class MessageFrom(forms.Form):
             raise forms.ValidationError("You have to enter a longer reason or you won't get the author permisson")
         else:
             return reason
+
+        

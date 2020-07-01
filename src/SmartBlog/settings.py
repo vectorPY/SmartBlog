@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-from .conf import EMAIL_USER, EMAIL_PASSWORD
+from .conf import Config
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'sass_processor',
     'registration',
+    'comments',
 ]
 
 MIDDLEWARE = [
@@ -63,7 +64,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates'),
                  os.path.join(BASE_DIR, 'templates'),
-                 os.path.join(BASE_DIR, 'blog/templates')],
+                 os.path.join(BASE_DIR, 'blog/templates'),
+                 os.path.join(BASE_DIR, 'comments/templates')],
 
         'APP_DIRS': True,
         'OPTIONS': {
@@ -148,5 +150,5 @@ create a conf.py file and insert EMAIL_USER and EMAIL_PASSWORD as variables
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = EMAIL_USER
-EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
+EMAIL_HOST_USER = Config.EMAIL_USER
+EMAIL_HOST_PASSWORD = Config.EMAIL_PASSWORD
