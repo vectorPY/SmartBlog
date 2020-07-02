@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, UpdateView
 from .models import Blog
 from .forms import RawBlogForm, MessageFrom
@@ -81,3 +81,17 @@ def apply_author(response):
     }
 
     return render(response, "message.html", context)
+
+
+def delete_view(response, my_id):
+    obj = get_object_or_404(Blog, id=my_id)
+
+    if response.method == 'POST':
+        obj.delete()
+
+        return redirect('../../')
+
+    context = {
+        "obj": obj
+    }
+    return render(response, "", context)
