@@ -4,6 +4,7 @@ from .models import Blog
 from .forms import RawBlogForm, MessageFrom
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
+from comments.models import Comment
 
 
 # Create your views here.
@@ -36,9 +37,10 @@ def create_blog(response):
 
 def full_blog(response, my_id):
     blog = Blog.objects.filter(id=my_id)
-
+    comments = Comment.objects.all().filter(article=my_id)
     context = {
-        "blog": blog
+        "blog": blog,
+        "comments": comments
     }
     return render(response, "full_blog.html", context)
 

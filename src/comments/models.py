@@ -17,4 +17,4 @@ class Comment(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     content = models.CharField(max_length=1800, validators=[validate_content])
     likes = models.IntegerField(default=0)
-
+    article = models.IntegerField(default=0)
