@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% load auth_extras %}
+
+{% block title %}
+    <title>Delete</title>
+{% endblock %}
+
+
+{% block content %}
+    {% if request.user|has_group:"Admin" %}
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="form-group">
+                    <h1>Do you want to delete the comment of {{ obj.user }}</h1>
+                    <form method="post" action="" class="form-group mb-3">{% csrf_token %}
+                        {{ form|crispy }}
+                        <button class="btn btn-success">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>You are not allowed to do that! Go back <a href="../../home">here</a></p>
+    {% endif %}
+{% endblock %}
+
+
+{% block extra %}
+    <p>Go back home <a href="../../home">here</a>!</p>
+{% endblock %}

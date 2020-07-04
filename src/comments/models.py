@@ -11,6 +11,14 @@ def validate_content(value: str):
         )
 
 
+def validate_reason(value: str):
+    if len(value) < 7:
+        raise ValidationError(
+            _('%(value)s (name) is too long'),
+            params={'value': value},
+        )
+
+
 # Create your models here.
 class Comment(models.Model):
     user = models.CharField(max_length=115)
@@ -18,3 +26,9 @@ class Comment(models.Model):
     content = models.CharField(max_length=1800, validators=[validate_content])
     likes = models.IntegerField(default=0)
     article = models.IntegerField(default=0)
+
+
+class DeleteComment(models.Model):
+    deleted_by = models.CharField(max_length=115)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    reason = models.CharField(max_length=415, validators=[validate_reason])
