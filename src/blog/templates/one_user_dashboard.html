@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    <title>User</title>
+{% endblock %}
+
+
+{% block content %}
+    <h1 style="text-align: center">Profile of {{ user.username }}</h1>
+    <div id="info-text" class="col-8" style="font-size: 25px">
+        <p>- {{ user.username }} published {{ amount }} blogs</p>
+        <p>- {{ user.username }} wrote {{ amount_comments }} comments</p>
+    </div>
+{% endblock %}
+
+
+{% block extra %}
+    <h1>You are not logged in</h1>
+    <p><a href="/login">Click here</a> to log in</p>
+{% endblock %}

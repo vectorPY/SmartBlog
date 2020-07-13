@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, UpdateView
 from .models import Blog, DeleteBlog
 from .forms import RawBlogForm, MessageFrom, DeleteBlogForm
@@ -162,3 +162,17 @@ def user_dashboard(response):
     return render(response, "user_dashboard.html", context)
 
 
+def one_user_dashboard(response, pk):
+    user = get_object_or_404(User, username=pk)
+    blogs = Blog.objects.all().filter(author=pk)
+    comments = Comment.objects.all().filter(user=pk)
+
+    context = {
+        "user": user,
+        "blogs": blogs,
+        "amount": len(blogs),
+        "comments": comments,
+        "amount_comments": len(comments)
+    }
+
+    return render(response, "one_user_dashboard.html", context)

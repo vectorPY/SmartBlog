@@ -7,7 +7,8 @@ from .views import (home,
                     apply_author,
                     delete_view,
                     dashboard,
-                    user_dashboard)
+                    user_dashboard,
+                    one_user_dashboard)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -21,5 +22,6 @@ urlpatterns = [
     path('apply/', apply_author, name="Apply_author"),
     path('deleteBlog/<int:pk>/', delete_view, name="delete_blog"),
     path('dashboard/', dashboard, name="dashboard"),
-    path('users/', user_dashboard, name="user_dashboard")
+    path('users/', user_dashboard, name="user_dashboard"),
+    path('user/<str:pk>/', one_user_dashboard, name="dashboard_of_one_user")
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
