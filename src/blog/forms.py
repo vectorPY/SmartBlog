@@ -1,6 +1,6 @@
 from django import forms
-from .models import Blog
-from django.forms import Select
+from .models import Blog, DeleteBlog
+from django.forms import Select, Textarea
 
 sections = [
     ('Food', 'Food'),
@@ -36,4 +36,13 @@ class MessageFrom(forms.Form):
         else:
             return reason
 
-        
+
+class DeleteBlogForm(forms.ModelForm):
+    class Meta:
+        model = DeleteBlog
+        fields = ['reason']
+
+        widgets = {
+            "reason": Textarea,
+        }
+

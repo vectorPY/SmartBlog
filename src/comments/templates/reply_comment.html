@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Reply</title>
+{% endblock %}
+
+
+{% block content %}
+    <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="form-group">
+                    <h1>Do you want to reply to the comment of {{ comment.user }}</h1>
+                    <form method="post" action="" class="form-group mb-3">{% csrf_token %}
+                        {{ form|crispy }}
+                        <button class="btn btn-success">Reply</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+
+{% block extra %}
+    <h1>You are not logged in</h1>
+    <p><a href="/login">Click here</a> to log in</p>
+{% endblock %}

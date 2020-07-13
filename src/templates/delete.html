@@ -1,15 +1,31 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
+{% load auth_extras %}
+
 {% block title %}
     <title>Delete</title>
 {% endblock %}
 
 {% block content %}
-
+    {% if request.user|has_group:"Admin" %}
+        <h1 style="text-align: center">Delete the blog '{{ obj.title }}'</h1>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="form-group">
+                    <form method="post" action="." class="form-group mb-3">{% csrf_token %}
+                        {{ form|crispy }}
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}
 
 
 
 {% block extra %}
-
+<h1>You are not logged in</h1>
+<p><a href="/login">Click here</a> to log in</p>
 {% endblock %}

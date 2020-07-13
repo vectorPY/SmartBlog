@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% load auth_extras %}
+
+{% block title %}
+    <title>Dashboard</title>
+{% endblock %}
+
+
+{% block content %}
+    {% if request.user|has_group:"Admin" %}
+        <!--All Blogs-->
+        <h1 style="text-align: center">All blogs</h1>
+        <table class="table table-dark">
+        <tr>
+            <th>Author</th>
+            <th>Title</th>
+            <th>Timestamp</th>
+            <th>Likes</th>
+            <th>Dislikes</th>
+            <th>Section (topic)</th>
+            <th>Read</th>
+        </tr>
+        {% for objs in blogs %}
+            <tr>
+                <td>{{ objs.author }}</td>
+                <td>{{ objs.title }}</td>
+                <td>{{ objs.timestamp }}</td>
+                <td>{{ objs.likes }}</td>
+                <td>{{ objs.dislikes }}</td>
+                <td>{{ objs.section }}</td>
+                <td><a href="/blog/{{ objs.id }}"><button class="btn btn-success">Read</button></a></td>
+            </tr>
+        {% endfor %}
+        </table>
+
+        <!--Deleted Blogs-->
+        <h1 style="text-align: center">Deleted Blogs</h1>
+        <table class="table table-dark">
+        <tr>
+            <th>Deleted by</th>
+            <th>Reason</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for objs in deleted_blogs %}
+            <tr>
+                <td>{{ objs.deleted_by }}</td>
+                <td>{{ objs.reason }}</td>
+                <td>{{ objs.timestamp }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+
+        <!--Comments-->
+        <h1 style="text-align: center">All comments</h1>
+        <table class="table table-dark">
+        <tr>
+            <th>user</th>
+            <th>content</th>
+            <th>likes</th>
+            <th>article</th>
+            <th>timestamp</th>
+        </tr>
+        {% for objs in comments %}
+            <tr>
+                <td>{{ objs.user }}</td>
+                <td>{{ objs.content }}</td>
+                <td>{{ objs.likes }}</td>
+                <td>{{ objs.article }}</td>
+                <td>{{ objs.timestamp }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+
+        <!--Deleted Comments-->
+        <h1 style="text-align: center">Deleted Comments</h1>
+        <table class="table table-dark">
+        <tr>
+            <th>Deleted by</th>
+            <th>Reason</th>
+            <th>Timestamp</th>
+        </tr>
+        {% for objs in deleted_comments %}
+            <tr>
+                <td>{{ objs.deleted_by }}</td>
+                <td>{{ objs.reason }}</td>
+                <td>{{ objs.timestamp }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+
+    {% else %}
+        <h1 style="text-align: center">You are not allowed to see this site! Go back <a href="/home">here</a></h1>
+    {% endif %}
+{% endblock %}
+
+{% block extra %}
+
+<h1>You are not logged in</h1>
+<p><a href="/login">Click here</a> to log in</p>
+
+{% endblock %}

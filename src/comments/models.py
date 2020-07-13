@@ -14,7 +14,7 @@ def validate_content(value: str):
 def validate_reason(value: str):
     if len(value) < 7:
         raise ValidationError(
-            _('%(value)s (name) is too long'),
+            _('%(value)s (name) is too short'),
             params={'value': value},
         )
 
@@ -29,6 +29,28 @@ class Comment(models.Model):
 
 
 class DeleteComment(models.Model):
+    deleted_by = models.CharField(max_length=115)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    reason = models.CharField(max_length=415, validators=[validate_reason])
+
+
+class ReportComment(models.Model):
+    reporter = models.CharField(max_length=115)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    reason = models.CharField(max_length=415, validators=[validate_reason])
+    comment = models.IntegerField(default=0)
+    done = models.BooleanField(default=False)
+
+
+class ReplyComment(models.Model):
+    author = models.CharField(max_length=115)
+    replied_to = models.IntegerField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    content = models.CharField(max_length=1915)
+    likes = models.IntegerField(default=0)
+
+
+class DeleteReply(models.Model):
     deleted_by = models.CharField(max_length=115)
     timestamp = models.DateTimeField(auto_now_add=True)
     reason = models.CharField(max_length=415, validators=[validate_reason])

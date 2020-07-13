@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% load auth_extras %}
+
 {% block title %}
  <link rel="stylesheet" type="text/css" href="{% static 'blog.css' %}">
  <title>Blog</title>
@@ -25,10 +27,32 @@
                     <h5 class="card-title">{{ comment.content }}</h5>
                     <p class="card-text">by {{ comment.user }}</p>
                     <p>created at: {{ comment.timestamp }}</p>
+                    {% if request.user|has_group:"Admin" %}
+                        <a href="/deleteComment/{{ comment.id }}"><button class="btn btn-danger" >Delete</button></a>
+                    {% endif %}
+                    <a href="/replyComment/{{ comment.id }}"><button class="btn btn-success">Reply</button></a>
                   </div>
             </div>
         </div>
+        {% for reply in reply %}
+            {% if comment.id == reply.replied_to %}
+                <div class="col-8 d-flex justify-content-center">
+                    <div class="card" style="width:50rem; margin-bottom: 15px;">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ reply.content }}</h5>
+                            <p class="card-text">by {{ reply.author }}</p>
+                            <p>created at: {{ reply.timestamp }}</p>
+                            {% if request.user|has_group:"Admin" %}
+                                <a href="/deleteComment/{{ comment.id }}"><button class="btn btn-danger" >Delete</button></a>
+                            {% endif %}
+                            <h7 class="card-title">Replied to the comment of {{ comment.user }}</h7>
+                          </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
     {% endfor %}
+
 {% endblock %}
 
 {% block extra %}

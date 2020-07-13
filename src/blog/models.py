@@ -38,6 +38,14 @@ def validate_shortversion(value: str):
         )
 
 
+def validate_reason(value: str):
+    if len(value) < 15:
+        raise ValidationError(
+            _('%(value)s (reason) is too short'),
+            params={'value': value},
+        )
+
+
 # Create your models here.
 class Blog(models.Model):
     author = models.CharField(max_length=115, validators=[validate_name])
@@ -55,3 +63,9 @@ class Blog(models.Model):
             ("can_write", "Can write"),
             ("can_read", "Can read"),
         )
+
+
+class DeleteBlog(models.Model):
+    deleted_by = models.CharField(max_length=115)
+    reason = models.CharField(max_length=415, validators=[])
+    timestamp = models.DateTimeField(auto_now_add=True)
