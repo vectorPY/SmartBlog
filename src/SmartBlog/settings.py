@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'sass_processor',
     'registration',
     'comments',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -65,7 +66,8 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR, 'templates'),
                  os.path.join(BASE_DIR, 'templates'),
                  os.path.join(BASE_DIR, 'blog/templates'),
-                 os.path.join(BASE_DIR, 'comments/templates')],
+                 os.path.join(BASE_DIR, 'comments/templates'),
+                 os.path.join(BASE_DIR, 'accounts/templates')],
 
         'APP_DIRS': True,
         'OPTIONS': {
