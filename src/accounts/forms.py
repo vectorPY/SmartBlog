@@ -1,5 +1,5 @@
 from django import forms
-from .models import Banned
+from .models import Banned, ExemptionRequest
 from django.forms import Textarea
 
 
@@ -12,3 +12,12 @@ class BannedForm(forms.ModelForm):
             'reason': Textarea,
         }
 
+
+class ExemptionRequestForm(forms.ModelForm):
+    class Meta:
+        model = ExemptionRequest
+        fields = ['reason']
+
+        widgets = {
+            'reason': Textarea,
+        }

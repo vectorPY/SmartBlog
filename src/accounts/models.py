@@ -18,3 +18,8 @@ class Banned(models.Model):
     reason = models.CharField(max_length=415, validators=[validate_reason])
     timestamp = models.DateTimeField(auto_now_add=True)
 
+
+class ExemptionRequest(models.Model):
+    user = models.CharField(max_length=115)
+    reason = models.CharField(max_length=1500, validators=[validate_reason])
+    timestamp = models.DateTimeField(auto_now_add=True)
