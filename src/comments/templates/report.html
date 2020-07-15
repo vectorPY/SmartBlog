@@ -8,17 +8,21 @@
 
 
 {% block content %}
-    <div class="row justify-content-center">
-            <div class="col-8">
-                <div class="form-group">
-                    <h1 style="text-align: center">Do you want to report the comment of {{ obj.user }}</h1>
-                    <form method="post" action="" class="form-group mb-3">{% csrf_token %}
-                        {{ form|crispy }}
-                        <button class="btn btn-success">Delete</button>
-                    </form>
+    {% if request.user|is_banned %}
+        <p>You are banned</p>
+    {% else %}
+        <div class="row justify-content-center">
+                <div class="col-8">
+                    <div class="form-group">
+                        <h1 style="text-align: center">Do you want to report the comment of {{ obj.user }}</h1>
+                        <form method="post" action="" class="form-group mb-3">{% csrf_token %}
+                            {{ form|crispy }}
+                            <button class="btn btn-success">Delete</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+    {% endif %}
 {% endblock %}
 
 

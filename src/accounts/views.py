@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import BannedForm
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 
 
 # Create your views here.
@@ -13,7 +13,8 @@ def ban_view(response, user):
 
             instance.user = user
             banned_group = Group.objects.get(name="banned")
-            banned_group.user_set.add(user)
+            ban_user: User = User.objects.filter(username=user).first()
+            banned_group.user_set.add(ban_user.id)
 
             instance.save()
 

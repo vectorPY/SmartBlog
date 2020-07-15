@@ -143,12 +143,16 @@ def dashboard(response):
     deleted_blogs = DeleteBlog.objects.all()
     comments = Comment.objects.all()
     deleted_comments = DeleteComment.objects.all()
+    admins = User.objects.filter(groups__name='Admin')
+    banned = User.objects.filter(groups__name='banned')
 
     context = {
         "blogs": blogs,
         "deleted_blogs": deleted_blogs,
         "comments": comments,
-        "deleted_comments": deleted_comments
+        "deleted_comments": deleted_comments,
+        'admins': admins,
+        'banned': banned
     }
     return render(response, "dashboard.html", context)
 

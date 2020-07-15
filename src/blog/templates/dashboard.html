@@ -96,7 +96,11 @@
 
 {% block extra %}
 
-<h1>You are not logged in</h1>
-<p><a href="/login">Click here</a> to log in</p>
+{% if request.user|is_banned %}
+    <p>You are banned</p>
+{% else %}
+    <h1>You are not logged in</h1>
+    <p><a href="/login">Click here</a> to log in</p>
+{% endif %}
 
 {% endblock %}
