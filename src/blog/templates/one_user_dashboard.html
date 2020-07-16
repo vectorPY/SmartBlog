@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load auth_extras %}
 
 {% block title %}
     <title>User</title>
@@ -8,7 +9,7 @@
 
 {% block content %}
     {% if request.user|is_banned %}
-        <p>You are banned</p>
+        <p style="text-align: center; font-size: 45px">You are banned</p>
     {% else %}
         <h1 style="text-align: center">Profile of {{ user.username }}</h1>
         <div id="info-text" class="col-8" style="font-size: 25px">

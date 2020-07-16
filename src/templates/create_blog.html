@@ -12,7 +12,7 @@
 {% block content %}
     {% if request.user|has_group:"Admin" %}
         {% if request.user|is_banned %}
-            <p>You are banned</p>
+            <p style="text-align: center; font-size: 45px">You are banned</p>
         {% else %}
             <div class="row justify-content-center">
                 <div class="col-8">

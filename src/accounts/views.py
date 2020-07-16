@@ -34,7 +34,7 @@ def exemption_request_view(response, user):
     user: User = User.objects.filter(username=user).first()
     banned_group: Group = Group.objects.get(name="banned")
 
-    if user in banned_group:
+    if banned_group in user.groups.all():
         if response.method == 'POST':
             form = ExemptionRequestForm(response.POST)
 
@@ -48,7 +48,16 @@ def exemption_request_view(response, user):
                     'vector.thedev@gmail.com',
                     ['muellergoldmann@gmail.com']
                 )
-
+                print("Sent!")
                 instance.save()
+        else:
+            form = ExemptionRequestForm()
+
+        context = {
+            "form": form,
+            "user": user
+        }
+        return render(response, "exemRequ.html", context)
+
     else:
         return redirect('../../home')

@@ -4,26 +4,32 @@
 {% load auth_extras %}
 
 {% block title %}
-    <title>Apply</title>
+    <title>Exemption Request</title>
 {% endblock %}
+
 
 {% block content %}
     {% if request.user|is_banned %}
-        <p style="text-align: center; font-size: 45px">You are banned</p>
-    {% else %}
+        <h1 style="text-align: center">Exemption Request</h1>
         <div class="row justify-content-center">
             <div class="col-8">
                 <div class="form-group">
                     <form method="post" action="." class="form-group mb-3">{% csrf_token %}
                         {{ form|crispy }}
-                        {{ form.media }}
-                        <button class="btn btn-success">Apply</button>
+                        <button class="btn btn-success">Send</button>
                     </form>
                 </div>
             </div>
         </div>
+    {% else %}
+        <div style="text-align: center">
+            <h1>You are not banned</h1>
+            <p>Go back <a href="/home">here</a></p>
+        </div>
     {% endif %}
+
 {% endblock %}
+
 
 {% block extra %}
     <h1>You are not logged in</h1>
