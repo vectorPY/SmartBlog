@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
-from .forms import BannedForm, ExemptionRequestForm
+from .forms import (BannedForm,
+                    ExemptionRequestForm,
+                    WarnUserForm)
 from django.contrib.auth.models import Group, User
 from django.core.mail import send_mail
 
@@ -61,3 +63,31 @@ def exemption_request_view(response, user):
 
     else:
         return redirect('../../home')
+
+
+def warn_user_view(response, user):
+    user_obj = User.objects.filter(username=user).first()
+    if response.method == 'POST':
+        form = WarnUserForm(response.POST)
+
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.banned_by = response.user
+            instance.user = user
+            instance.save()
+
+            send_mail(
+                f"You were warned by {response.user}",
+                instance.reason,
+                "muellergoldmann@gmail.com",
+                [user_obj.email]
+            )
+
+    else:
+        form = WarnUserForm()
+
+    context = {
+        "user": user_obj,
+        "form": form
+    }
+    return render(response, "", context)
