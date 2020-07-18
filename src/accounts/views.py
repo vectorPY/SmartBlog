@@ -82,6 +82,7 @@ def warn_user_view(response, user):
                 "muellergoldmann@gmail.com",
                 [user_obj.email]
             )
+            return redirect("../../home")
 
     else:
         form = WarnUserForm()
@@ -90,4 +91,4 @@ def warn_user_view(response, user):
         "user": user_obj,
         "form": form
     }
-    return render(response, "", context)
+    return render(response, "warn_user.html", context)

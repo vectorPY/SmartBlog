@@ -1,6 +1,7 @@
 from django.test import TestCase
-from accounts.models import Banned, ExemptionRequest
-
+from accounts.models import (Banned,
+                             ExemptionRequest,
+                             WarnUser)
 
 # Create your tests here.
 class BannedTest(TestCase):
@@ -22,3 +23,12 @@ class ExemptionRequestTest(TestCase):
         self.assertEqual(self.exemp_req.banned_by, "vector")
         self.assertEqual(self.exemp_req.reason, "nothing")
 
+
+class WarnUserTest(TestCase):
+    def setUp(self) -> None:
+        self.warning = WarnUser(user="test", warned_by="vector", reason="nothing")
+
+    def test_warn_user(self):
+        self.assertEqual(self.warning.user, "test")
+        self.assertEqual(self.warning.warned_by, "vector")
+        self.assertEqual(self.warning.reason, "nothing")
