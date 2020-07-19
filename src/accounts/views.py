@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import (BannedForm,
                     ExemptionRequestForm,
-                    WarnUserForm)
+                    WarnUserForm,
+                    BanFromPartOfBlogForm)
 from django.contrib.auth.models import Group, User
 from django.core.mail import send_mail
 
@@ -92,3 +93,42 @@ def warn_user_view(response, user):
         "form": form
     }
     return render(response, "warn_user.html", context)
+
+
+def ban_part_of_blog_view(response, user):
+    user_obj = User.objects.filter(username=user).first()
+
+    if response.method == 'POST':
+        form = BanFromPartOfBlogForm(response.POST)
+
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user = user
+            instance.banned_by = response.user
+            instance.save()
+
+            part = form.cleaned_data['part']
+
+            if part == "Comments":
+                comment_group = Group.objects.get(name="comment_ban")
+                comment_group.user_set.add(user)
+
+            elif part == "Write":
+                write_group = Group.objects.get(name="write_ban")
+                write_group.user_set.add(user)
+
+            elif part == 'Read':
+                read_group = Group.objects.get(name="read_ban")
+                read_group.user_set.add(user)
+
+            return redirect('../../home')
+
+    else:
+        form = BanFromPartOfBlogForm()
+
+    context = {
+        "form": form,
+        "user": user_obj
+    }
+
+    return render(response, "", context)
