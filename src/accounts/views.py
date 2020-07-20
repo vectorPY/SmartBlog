@@ -111,15 +111,15 @@ def ban_part_of_blog_view(response, user):
 
             if part == "Comments":
                 comment_group = Group.objects.get(name="comment_ban")
-                comment_group.user_set.add(user)
+                comment_group.user_set.add(user_obj.id)
 
             elif part == "Write":
                 write_group = Group.objects.get(name="write_ban")
-                write_group.user_set.add(user)
+                write_group.user_set.add(user_obj.id)
 
             elif part == 'Read':
                 read_group = Group.objects.get(name="read_ban")
-                read_group.user_set.add(user)
+                read_group.user_set.add(user_obj.id)
 
             return redirect('../../home')
 
@@ -131,4 +131,4 @@ def ban_part_of_blog_view(response, user):
         "user": user_obj
     }
 
-    return render(response, "", context)
+    return render(response, "ban_part_of_blog.html", context)

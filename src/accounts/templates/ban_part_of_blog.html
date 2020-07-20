@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load auth_extras %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    <title>Ban form Part</title>
+{% endblock %}
+
+
+{% block content %}
+    {% if request.user|has_group:"Admin" %}
+        <h1 style="text-align: center">Ban a user</h1>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="form-group">
+                    <form method="post" action="." class="form-group mb-3">{% csrf_token %}
+                        {{ form|crispy }}
+                        <button class="btn btn-success">Ban</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <h1 style="font-size: 50px; text-align: center">OOPS!</h1>
+        <div class="col-8">
+            <p>Go back <a href="/home">here</a></p>
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+{% block extra %}
+
+{% endblock %}

@@ -11,6 +11,8 @@
 {% block content %}
     {% if request.user|is_banned %}
         <p style="text-align: center; font-size: 45px">You are banned</p>
+    {% elif request.user|has_group:"comment_ban" %}
+        <p style="text-align: center; font-size: 45px">You are banned from the comment section</p>
     {% else %}
          <div class="row justify-content-center">
                 <div class="col-8">
