@@ -11,12 +11,15 @@
     {% if request.user|is_banned %}
         <p style="text-align: center; font-size: 45px">You are banned</p>
     {% else %}
-        <h1 style="text-align: center">Profile of {{ user.username }}</h1>
-        <div id="info-text" class="col-8" style="font-size: 25px">
+        <h1 style="text-align: center; padding-bottom: 80px">Profile of {{ user.username }}</h1>
+        <div id="info-text" class="col-15" style="font-size: 25px; text-align: center">
             <p>- {{ user.username }} published {{ amount }} blogs</p>
             <p>- {{ user.username }} wrote {{ amount_comments }} comments</p>
-            <a href="/banUser/{{ user.username }}/"><button class="btn btn-danger">Ban</button></a>
-            <a href="/warn/{{ user.username }}/"><button class="btn btn-warning">Warn</button></a>
+            {% if request.user|has_group:"Admin" %}
+                <a href="/banUser/{{ user.username }}/"><button class="btn btn-danger">Ban</button></a>
+                <a href="/banPart/{{ user.username }}"><button class="btn btn-danger">Ban form Part</button></a>
+                <a href="/warn/{{ user.username }}/"><button class="btn btn-warning">Warn</button></a>
+            {% endif %}
         </div>
     {% endif %}
 {% endblock %}
