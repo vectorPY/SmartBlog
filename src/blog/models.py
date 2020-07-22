@@ -67,5 +67,5 @@ class Blog(models.Model):
 
 class DeleteBlog(models.Model):
     deleted_by = models.CharField(max_length=115)
-    reason = models.CharField(max_length=415, validators=[])
+    reason = models.CharField(max_length=415, validators=[validate_reason])
     timestamp = models.DateTimeField(auto_now_add=True)

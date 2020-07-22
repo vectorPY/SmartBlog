@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'blog',
     'ckeditor',
     'crispy_forms',
-    'sass_processor',
     'registration',
     'comments',
     'accounts',
@@ -65,10 +64,10 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates'),
-                 os.path.join(BASE_DIR, 'templates'),
                  os.path.join(BASE_DIR, 'blog/templates'),
                  os.path.join(BASE_DIR, 'comments/templates'),
-                 os.path.join(BASE_DIR, 'accounts/templates')],
+                 os.path.join(BASE_DIR, 'accounts/templates'),
+                 os.path.join(BASE_DIR, 'ideas/templates')],
 
         'APP_DIRS': True,
         'OPTIONS': {

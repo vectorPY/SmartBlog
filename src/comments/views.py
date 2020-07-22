@@ -140,7 +140,7 @@ def delete_reply(response, pk):
             return redirect("../../articles")
 
     else:
-        form: DeleteCommentForm = DeleteCommentForm(response.POST)
+        form: DeleteCommentForm = DeleteCommentForm()
 
     context = {
         "form": form
