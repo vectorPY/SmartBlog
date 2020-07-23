@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load auth_extras %}
+{% load static %}
+
+
+{% block title %}
+    <title>Ideas</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'idea_card.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    {% if request.user|is_banned %}
+         <p style="text-align: center; font-size: 45px">You are banned</p>
+    {% else %}
+        {% for idea in ideas %}
+            <div class="col-16 d-flex justify-content-center">
+                    <div class="card" style="width:50rem; margin-bottom: 15px;">
+                          <div class="card-body">
+                            <h6 class="card-title">{{ idea.subject }}</h6>
+                            <h5 class="card-title">{{ idea.content }}</h5>
+                            <p class="card-text">by {{ idea.creator }}</p>
+                            <p>created at: {{ idea.timestamp }}</p>
+                            {% if request.user|has_group:"Admin" %}
+                                <a href="/deleteIdea/{{ comment.id }}"><button class="btn btn-danger" >Delete</button></a>
+                            {% endif %}
+                          </div>
+                    </div>
+                </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+
+{% block extra %}
+    <h1>You are not logged in</h1>
+    <p><a href="/login">Click here</a> to log in</p>
+{% endblock %}

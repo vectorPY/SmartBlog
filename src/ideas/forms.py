@@ -9,6 +9,6 @@ class CreateIdeaForm(forms.ModelForm):
         fields = ['subject', 'content']
 
         widgets = {
-            'content': Textarea,
+            'content': Textarea
         }
 

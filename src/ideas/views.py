@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import CreateIdeaForm
+from .models import Idea
 
 
 # Create your views here.
@@ -18,11 +19,19 @@ def create_idea(response):
         form: CreateIdeaForm = CreateIdeaForm()
 
     context = {
-        "form": form,
+        "form": form
     }
 
-    return render(response, "create_list.html", context)
+    return render(response, "create_idea.html", context)
 
 
+def idea_list(response):
+    ideas = Idea.objects.all()
+
+    context = {
+        "ideas": ideas
+    }
+
+    return render(response, "list_ideas.html", context)
 
 
