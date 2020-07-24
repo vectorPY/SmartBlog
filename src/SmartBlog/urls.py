@@ -23,5 +23,5 @@ urlpatterns = [
     path('', include('registration.urls')),
     path('', include('comments.urls')),
     path('', include('accounts.urls')),
-    path('', include('ideas.urls'))
+    path('ideas/', include('ideas.urls'))
 ]

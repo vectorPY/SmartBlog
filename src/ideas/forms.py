@@ -1,5 +1,5 @@
 from django import forms
-from .models import Idea
+from .models import Idea, DeleteIdea
 from django.forms.widgets import Textarea
 
 
@@ -12,3 +12,12 @@ class CreateIdeaForm(forms.ModelForm):
             'content': Textarea
         }
 
+
+class DeleteIdeaForm(forms.ModelForm):
+    class Meta:
+        model = DeleteIdea
+        fields = ['reason']
+
+        widgets = {
+            'reason': Textarea
+        }

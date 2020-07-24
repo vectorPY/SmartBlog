@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect
-from .forms import CreateIdeaForm
+from django.shortcuts import (render,
+                              redirect,
+                              get_object_or_404)
+from .forms import CreateIdeaForm, DeleteIdeaForm
 from .models import Idea
 
 
@@ -35,3 +37,27 @@ def idea_list(response):
     return render(response, "list_ideas.html", context)
 
 
+def delete_idea(response, pk):
+    idea = get_object_or_404(Idea, pk=pk)
+
+    if response.method == 'POST':
+        form = DeleteIdeaForm(response.POST)
+
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.deleted_by = response.user
+            instance.idea = pk
+            instance.save()
+
+            idea.delete()
+
+            return redirect('../../ideas')
+    else:
+        form = DeleteIdeaForm()
+
+    context = {
+        "form": form,
+        "idea": idea
+    }
+
+    return render(response, "delete_idea.html", context)

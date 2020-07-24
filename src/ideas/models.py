@@ -19,3 +19,9 @@ class Idea(models.Model):
     reviewed = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+
+class DeleteIdea(models.Model):
+    deleted_by = models.CharField(max_length=115)
+    reason = models.CharField(max_length=1500, validators=[validate])
+    idea = models.IntegerField()
+    timestamp = models. DateTimeField(auto_now_add=True)
